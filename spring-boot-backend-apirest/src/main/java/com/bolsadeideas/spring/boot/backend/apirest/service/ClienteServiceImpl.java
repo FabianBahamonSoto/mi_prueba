@@ -108,6 +108,7 @@ public class ClienteServiceImpl implements ClienteService
 	{
 		if(entity == null)
 		{
+			log.info("El usuario a eliminar es nulo.");;
 			throw new Exception("El usuario a eliminar es nulo.");
 		}
 		

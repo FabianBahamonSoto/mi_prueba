@@ -1,0 +1,74 @@
+package com.bolsadeideas.spring.boot.backend.apirest.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import com.bolsadeideas.spring.boot.backend.apirest.entity.Cliente;
+import com.bolsadeideas.spring.boot.backend.apirest.entity.repository.ClienteRepository;
+
+@Service
+@Scope("singleton")
+public class ClienteServiceImpl implements ClienteService
+{
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	@Override
+	public Cliente findByNombreAndApellido(Long nombre, Long apellido) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<Cliente> findAll() throws Exception 
+	{
+		return clienteRepository.findAll();
+	}
+
+	@Override
+	public Optional<Cliente> findById() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cliente save(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cliente update(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteById(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void validate(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Long count() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

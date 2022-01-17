@@ -1,0 +1,5 @@
+package com.bolsadeideas.spring.boot.backend.apirest.entity.repository;
+
+public interface ClienteRepository {
+
+}

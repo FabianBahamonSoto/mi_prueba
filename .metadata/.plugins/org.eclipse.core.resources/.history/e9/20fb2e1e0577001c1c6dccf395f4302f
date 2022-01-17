@@ -1,0 +1,59 @@
+package com.bolsadeideas.spring.boot.backend.apirest.controllers;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bolsadeideas.spring.boot.backend.apirest.entity.Cliente;
+import com.bolsadeideas.spring.boot.backend.apirest.service.ClienteService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = {"http://localhost:4200"})
+public class ClienteController 
+{
+	@Autowired
+	ClienteService clienteService;
+	
+	/**
+	 * @author Fabian Bahamon
+	 * @return Retorna todos los clientes registrados
+	 * @throws Exception
+	 */
+	@GetMapping("/clientes")
+	public ResponseEntity<List<Cliente>> findAllClients() throws Exception
+	{
+		List<Cliente> allClients = clienteService.findAll();
+		
+		return ResponseEntity.ok().body(allClients);
+	}
+	
+	/**
+	 * @param nombreCompleto: Compuesto por el nombre y apellido del usuario a buscar.
+	 * @return Retorna un objeto que contiene los datos completos del cliente.
+	 * @throws Exception
+	 */
+	@GetMapping("/clientes/nombrecompleto")
+	public ResponseEntity<Cliente> findClientByName(@Valid @RequestBody Cliente nombreCompleto) throws Exception
+	{
+		Cliente cliente = clienteService.findByNombreAndApellido(nombreCompleto.getNombre(), nombreCompleto.getApellido());
+		
+		return ResponseEntity.ok().body(cliente);
+	}
+	
+	
+	
+	
+	
+	
+}

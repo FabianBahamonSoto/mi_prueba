@@ -1,0 +1,23 @@
+package com.bolsadeideas.spring.boot.backend.apirest.service;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface GenericService<DATA, ID> 
+{
+	List<DATA> findAll() throws Exception;
+
+	Optional<DATA> findById() throws Exception;
+
+	DATA save(DATA entity) throws Exception;
+
+	DATA update(DATA entity) throws Exception;
+
+	void delete(DATA entity) throws Exception;
+
+	void deleteById(ID id) throws Exception;
+
+	void validate(DATA entity) throws Exception;
+
+	Long count();
+}

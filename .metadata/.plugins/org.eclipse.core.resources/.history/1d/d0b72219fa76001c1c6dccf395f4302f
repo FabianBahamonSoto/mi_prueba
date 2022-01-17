@@ -1,0 +1,54 @@
+package com.bolsadeideas.spring.boot.backend.apirest.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bolsadeideas.spring.boot.backend.apirest.entity.Cliente;
+import com.bolsadeideas.spring.boot.backend.apirest.service.ClienteService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping("/api")
+@Slf4j
+@CrossOrigin(origins = {"http://localhost:4200"})
+public class ClienteController 
+{
+	@Autowired
+	ClienteService clienteService;
+	
+	/**
+	 * @author Fabian Bahamon
+	 * @return Retorna todos los clientes registrados
+	 * @throws Exception
+	 */
+	@GetMapping("/clientes")
+	public ResponseEntity<List<Cliente>> findAllClients() throws Exception
+	{
+		List<Cliente> allClients = clienteService.findAll();
+		
+		return ResponseEntity.ok().body(allClients);
+	}
+	
+	@GetMapping("/clientes/{nombreCompleto}")
+	public ResponseEntity<Cliente> findClientByName(@PathVariable("nombreCompleto") String nombreCompleto) throws Exception
+	{
+		log.info("DATA: " + nombreCompleto);
+		//Cliente cliente = clienteService.findByNombreAndApellido(null, null);
+		
+		return ResponseEntity.ok().body(null);
+	}
+	
+	
+	
+	
+	
+	
+}

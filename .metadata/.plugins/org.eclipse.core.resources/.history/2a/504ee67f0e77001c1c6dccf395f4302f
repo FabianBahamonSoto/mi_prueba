@@ -1,0 +1,122 @@
+package com.bolsadeideas.spring.boot.backend.apirest.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.bolsadeideas.spring.boot.backend.apirest.entity.Cliente;
+import com.bolsadeideas.spring.boot.backend.apirest.entity.repository.ClienteRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Scope("singleton")
+@Slf4j
+public class ClienteServiceImpl implements ClienteService
+{
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	/**
+	 * @author Fabian Bahamon
+	 * @param No tiene parametros ya que es una consulta de todos los clientes registrados.
+	 * @return Todos los clientes registrados.
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public List<Cliente> findAll() throws Exception 
+	{
+		return clienteRepository.findAll();
+	}
+	
+	/**
+	 * @author Fabian Bahamon Soto
+	 * @param nombre: Hace referencia al nombre de entrada del cliente, 
+	 * apellido Hace referencia al apellido de entrada del cliente
+	 * @return Retorna una persona de la clase CLiente.
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	public Cliente findByNombreAndApellido(String nombre, String apellido) throws Exception 
+	{
+		Cliente cliente = clienteRepository.findByNombreAndApellido(nombre, apellido);
+		
+		if(cliente == null)
+		{
+			log.info("Error consultando usuario por nombre completo en 'findByNombreAndApellido'. ");
+			throw new Exception("'findByNombreAndApellido'. El usuario no existe");
+		}
+		
+		return cliente;
+	}
+
+	/**
+	 * @author Fabian Bahamon Soto
+	 * @param entity: Hace referencia al objeto con los atributos del cliente a guardar.
+	 * @return returna el objeto almacenado.
+	 */
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Cliente save(Cliente entity) throws Exception 
+	{
+		if(entity == null)
+		{
+			throw new Exception("El usuario a guardar es nulo.");
+		}
+		
+		String nombre = entity.getNombre();
+		String apellido = entity.getApellido(); 
+		Cliente clienteBusq = this.findByNombreAndApellido(nombre, apellido);
+		boolean t = clienteBusq == entity;
+		log.info("RESULTADOOOOOOOOO: " + t);
+		if(this.findByNombreAndApellido(nombre, apellido) == entity)
+		{
+			throw new Exception("El usuario ya existe.");
+		}
+		
+		return clienteRepository.save(entity);
+	}
+
+	@Override
+	public Cliente update(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteById(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void validate(Cliente entity) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Long count() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Optional<Cliente> findById() throws Exception 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

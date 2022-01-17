@@ -1,0 +1,20 @@
+package com.bolsadeideas.spring.boot.backend.apirest.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bolsadeideas.spring.boot.backend.apirest.entity.repository.ClienteRepository;
+
+class ClienteRepositoryIT 
+{
+	@Autowired
+	ClienteRepository clienteRepository; 
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}
